@@ -37,6 +37,8 @@ export class PostService {
   }
 
   forAuthor(authorId: number): Post[] {
-    return this.posts.filter((post) => post.authorId === authorId);
+    const a = this.posts.filter((post) => post.authorId === authorId);
+    console.log(a);
+    return a;
   }
 }

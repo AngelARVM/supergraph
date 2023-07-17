@@ -1,4 +1,5 @@
 import {
+  Args,
   Parent,
   Query,
   ResolveField,
@@ -7,7 +8,6 @@ import {
 } from '@nestjs/graphql';
 import { Post } from '../dto/post.dto';
 import { PostService } from '../post.service';
-import { Logger } from '@nestjs/common';
 import { User } from '../dto/user.dto';
 
 @Resolver(Post)
@@ -19,17 +19,25 @@ export class PostResolver {
     return this.postService.posts;
   }
 
+  @Query(() => [Post])
+  async postsByAuthorId(@Args('authorId') authorId: number): Promise<Post[]> {
+    return this.postService.forAuthor(authorId);
+  }
+
   @ResolveField((of) => User)
   author(@Parent() post: Post): any {
+    console.log({ context: 'Post graph - resolve field', post });
     return { __typename: 'User', id: post.authorId };
   }
 
   @ResolveReference()
-  resolveReference(reference: { __typename: string; id: number }): Post {
-    this.postService.logger.debug({
-      event: 'resolveReference',
+  resolveReference(reference: { __typename: string; authorId: number }): Post {
+    const a = this.postService.forAuthor(reference.authorId);
+    console.log({
+      context: 'Post graph - resolve reference',
       reference,
+      response: a,
     });
-    return this.postService.getPostById(reference.id);
+    return a[0];
   }
 }

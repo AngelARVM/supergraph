@@ -3,7 +3,9 @@ import { ObjectType, Field, Int, Directive, ID } from '@nestjs/graphql';
 import { User } from './user.dto';
 
 @ObjectType()
+@Directive('@key(fields: "authorId")')
 @Directive('@key(fields: "id")')
+@Directive('@extends')
 export class Post {
   @Field(() => Int)
   id: number;

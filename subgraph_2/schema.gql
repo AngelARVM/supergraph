@@ -27,7 +27,7 @@ type User {
   name: String!
   nickname: String!
   mail: String!
-  posts: [Post!]
+  posts: Post!
 }
 
 type Post {
@@ -40,6 +40,7 @@ type Post {
 
 type Query {
   posts: [Post!]!
+  postsByAuthorId(authorId: Float!): [Post!]!
 }
 
 scalar link__Import

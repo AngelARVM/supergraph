@@ -35,11 +35,12 @@ type User {
   name: String!
   nickname: String!
   mail: String!
-  posts: [Post!]
+  posts: Post
 }
 
 type Query {
   users: [User!]!
+  user: User!
 }
 
 scalar link__Import
