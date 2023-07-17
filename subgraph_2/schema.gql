@@ -24,10 +24,7 @@ directive @override(from: String!) on FIELD_DEFINITION
 
 type User {
   id: Int!
-  name: String!
-  nickname: String!
-  mail: String!
-  posts: Post!
+  posts: [Post!]!
 }
 
 type Post {
@@ -36,6 +33,7 @@ type Post {
   content: String!
   authorId: Int!
   author: User
+  user: User!
 }
 
 type Query {

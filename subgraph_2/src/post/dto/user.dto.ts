@@ -5,21 +5,10 @@ import { Post } from './post.dto';
 @Directive('@extends')
 @Directive('@key(fields: "id")')
 export class User {
+  @Field((type) => Int)
   @Directive('@external')
-  @Field(() => Int)
   id: number;
 
-  @Directive('@external')
-  @Field()
-  name: string;
-
-  @Directive('@external')
-  @Field()
-  nickname: string;
-
-  @Directive('@external')
-  @Field()
-  mail: string;
-
-  posts?: Post;
+  @Field((type) => [Post])
+  posts?: Post[];
 }

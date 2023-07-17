@@ -30,14 +30,8 @@ export class PostResolver {
     return { __typename: 'User', id: post.authorId };
   }
 
-  @ResolveReference()
-  resolveReference(reference: { __typename: string; authorId: number }): Post {
-    const a = this.postService.forAuthor(reference.authorId);
-    console.log({
-      context: 'Post graph - resolve reference',
-      reference,
-      response: a,
-    });
-    return a[0];
+  @ResolveField((of) => User)
+  user(@Parent() post: Post): any {
+    return { __typename: 'User', id: post.authorId };
   }
 }

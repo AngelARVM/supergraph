@@ -7,8 +7,8 @@ import { PostService } from '../post.service';
 export class UsersResolver {
   constructor(private readonly postsService: PostService) {}
 
-  @ResolveField('posts', (of) => Post)
-  public posts(@Parent() user: User): Post {
-    return this.postsService.forAuthor(user.id)[0];
+  @ResolveField((of) => [Post])
+  public posts(@Parent() user: User): Post[] {
+    return this.postsService.forAuthor(user.id);
   }
 }

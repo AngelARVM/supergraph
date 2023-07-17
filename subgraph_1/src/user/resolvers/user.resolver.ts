@@ -25,12 +25,6 @@ export class UserResolver {
     return this.userService.getUserById(1);
   }
 
-  @ResolveField(() => Post)
-  posts(@Parent() user: User): any {
-    console.log({ context: 'User Graph - resolve property', user });
-    return { __typename: 'Post', authorId: user.id };
-  }
-
   @ResolveReference()
   resolveReference(reference: { __typename: string; id: number }): User {
     return this.userService.getUserById(reference.id);

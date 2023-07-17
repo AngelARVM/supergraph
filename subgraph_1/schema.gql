@@ -22,20 +22,11 @@ directive @inaccessible on FIELD_DEFINITION | OBJECT | INTERFACE | UNION | ARGUM
 
 directive @override(from: String!) on FIELD_DEFINITION
 
-type Post {
-  id: Int!
-  title: String!
-  content: String!
-  authorId: Int!
-  author: User!
-}
-
 type User {
   id: Int!
   name: String!
   nickname: String!
   mail: String!
-  posts: Post
 }
 
 type Query {

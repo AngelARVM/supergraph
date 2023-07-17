@@ -16,7 +16,4 @@ export class User {
 
   @Field()
   mail: string;
-
-  @Field(() => Post, { nullable: true })
-  posts?: Post;
 }

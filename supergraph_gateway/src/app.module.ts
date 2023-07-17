@@ -13,6 +13,8 @@ import { IntrospectAndCompose } from '@apollo/gateway';
         cors: true,
       },
       gateway: {
+        pollingInterval: 3000,
+        subgraphHealthCheck: true,
         supergraphSdl: new IntrospectAndCompose({
           subgraphs: [
             { name: 'subgraph_1', url: 'http://localhost:3001/graphql' },

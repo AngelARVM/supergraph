@@ -8,7 +8,7 @@ import {
 } from '@nestjs/apollo';
 import { LoggerModule } from 'nestjs-pino';
 import { UserModule } from './user/user.module';
-
+import { ApolloServerPluginInlineTrace } from '@apollo/server/plugin/inlineTrace';
 @Module({
   imports: [
     UserModule,
@@ -26,6 +26,7 @@ import { UserModule } from './user/user.module';
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: 'schema.gql',
+      plugins: [ApolloServerPluginInlineTrace()],
     }),
   ],
   controllers: [AppController],

@@ -8,6 +8,8 @@ import {
 } from '@nestjs/apollo';
 import { LoggerModule } from 'nestjs-pino';
 import { PostModule } from './post/post.module';
+import { User } from './post/dto/user.dto';
+import { ApolloServerPluginInlineTrace } from '@apollo/server/plugin/inlineTrace';
 
 @Module({
   imports: [
@@ -26,6 +28,10 @@ import { PostModule } from './post/post.module';
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
       autoSchemaFile: 'schema.gql',
+      plugins: [ApolloServerPluginInlineTrace()],
+      buildSchemaOptions: {
+        orphanedTypes: [User],
+      },
     }),
   ],
   controllers: [AppController],
